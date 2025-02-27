@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: red;
 }
 
 h1,
@@ -16,11 +15,58 @@ h6 {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
 }
 
 ul,
 ol {
   list-style: none;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: rgb(201, 132, 132);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px; /* Per evitar que el contingut toqui les vores en mòbils */
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Permet que el contingut s'adapti a pantalles petites */
+  width: 90%;
+  max-width: 600px; /* No deixem que sigui massa ample */
+  aspect-ratio: 16/9; /* Manté una proporció adequada */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px; /* Fa que es vegi més modern */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Ombra suau per destacar la secció */
+}
+
+h5 {
+  text-align: center; /* Assegura que el text es centri */
+}
+
+/* 🔹 Media Queries per mòbils */
+@media (max-width: 600px) {
+  section {
+    width: 75%; /* Més ample en mòbils per aprofitar l'espai */
+    aspect-ratio: auto; /* Permet que l'alçada s'ajusti automàticament */
+    padding: 15px;
+    aspect-ratio: 1/1; /* Manté una proporció adequada */
+  }
+
+  h5 {
+    font-size: 1rem; /* Redueix la mida del text en mòbils */
+  }
 }
