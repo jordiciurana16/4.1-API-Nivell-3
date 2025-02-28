@@ -2,6 +2,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const joke = document.querySelector("h5");
   const button = document.querySelector("button");
+  const score = document.querySelector("h6");
+
+  const stars = document.querySelectorAll("span");
 
   if (!joke || !button) {
     console.error("There was an error loading the page");
@@ -32,5 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   button.addEventListener("click", () => {
     fetchJoke();
+  });
+
+  score.addEventListener("mouseover", (event) => {
+    const hoveredStarIndex = Array.from(stars).indexOf(event.target);
+    stars.forEach((star, index) => {
+      star.innerHTML = index <= hoveredStarIndex ? "&#9733;" : "&#9734;";
+    });
   });
 });
