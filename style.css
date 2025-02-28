@@ -37,11 +37,23 @@ body {
   background-color: #c98484;
 }
 
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 25px 0 0 30px;
+  gap: 20px;
+}
+
+header span {
+  font-size: 2rem;
+}
+
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
   padding: 20px;
 }
 
