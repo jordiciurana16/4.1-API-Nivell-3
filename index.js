@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 const jokeData = {
                     id: data.id,
-                    text: data.joke,
+                    joke: data.joke,
                     rating: undefined,
                 };
                 jokeReports.push(jokeData);
@@ -60,6 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateJokeRating(rating) {
         if (jokeReports.length > 0) {
             jokeReports[jokeReports.length - 1].rating = rating;
+        }
+    }
+    function updateJokeDate(date) {
+        if (jokeReports.length > 0) {
+            jokeReports[jokeReports.length - 1].date = date;
         }
     }
     function resetScore() {
@@ -82,17 +87,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     score.addEventListener("mouseout", () => {
         stars.forEach((star, index) => {
-            star.innerHTML = index <= selectedStarIndex ? "&#9733;" : "&#9734;";
+            star.innerHTML =
+                index <= (selectedStarIndex !== null && selectedStarIndex !== void 0 ? selectedStarIndex : -1) ? "&#9733;" : "&#9734;";
         });
     });
     score.addEventListener("click", (event) => {
         const clickedStarIndex = Array.from(stars).indexOf(event.target);
+        const ratingTime = new Date().toISOString();
         if (clickedStarIndex !== -1) {
             selectedStarIndex = clickedStarIndex;
             updateJokeRating((selectedStarIndex + 1));
+            updateJokeDate(ratingTime);
         }
         stars.forEach((star, index) => {
-            star.innerHTML = index <= selectedStarIndex ? "&#9733;" : "&#9734;";
+            star.innerHTML =
+                index <= (selectedStarIndex !== null && selectedStarIndex !== void 0 ? selectedStarIndex : -1) ? "&#9733;" : "&#9734;";
         });
     });
 });

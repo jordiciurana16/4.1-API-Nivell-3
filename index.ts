@@ -2,11 +2,13 @@
 
 type Joke = {
   readonly id: string;
-  text: string;
+  joke: string;
   rating?: Score;
+  date?: Time;
 };
 
 type Score = undefined | 1 | 2 | 3;
+type Time = undefined | string;
 
 const jokeReports: Joke[] = [];
 
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const jokeData: Joke = {
         id: data.id,
-        text: data.joke,
+        joke: data.joke,
         rating: undefined,
       };
 
@@ -67,6 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateJokeRating(rating: Score) {
     if (jokeReports.length > 0) {
       jokeReports[jokeReports.length - 1].rating = rating;
+    }
+  }
+
+  function updateJokeDate(date: string) {
+    if (jokeReports.length > 0) {
+      jokeReports[jokeReports.length - 1].date = date;
     }
   }
 
@@ -97,7 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   score.addEventListener("mouseout", () => {
     stars.forEach((star, index) => {
-      star.innerHTML = index <= selectedStarIndex ? "&#9733;" : "&#9734;";
+      star.innerHTML =
+        index <= (selectedStarIndex ?? -1) ? "&#9733;" : "&#9734;";
     });
   });
 
@@ -106,13 +115,17 @@ document.addEventListener("DOMContentLoaded", () => {
       event.target as HTMLSpanElement
     );
 
+    const ratingTime = new Date().toISOString();
+
     if (clickedStarIndex !== -1) {
       selectedStarIndex = clickedStarIndex;
       updateJokeRating((selectedStarIndex + 1) as Score);
+      updateJokeDate(ratingTime);
     }
 
     stars.forEach((star, index) => {
-      star.innerHTML = index <= selectedStarIndex ? "&#9733;" : "&#9734;";
+      star.innerHTML =
+        index <= (selectedStarIndex ?? -1) ? "&#9733;" : "&#9734;";
     });
   });
 });
