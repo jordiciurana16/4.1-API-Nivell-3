@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
     let selectedStarIndex;
+    let useChuckNorrisAPI = false;
     function fetchWeather() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -119,7 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function fetchJoke() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield fetch("https://icanhazdadjoke.com/", {
+                const response = yield fetch(useChuckNorrisAPI
+                    ? "https://api.chucknorris.io/jokes/random"
+                    : "https://icanhazdadjoke.com/", {
                     method: "GET",
                     headers: {
                         Accept: "application/json",
@@ -130,18 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 const data = yield response.json();
                 if (joke) {
-                    joke.textContent = data.joke;
+                    joke.textContent = useChuckNorrisAPI ? data.value : data.joke;
                 }
                 else {
                     console.error("Joke element is null");
                 }
                 const jokeData = {
                     id: data.id,
-                    joke: data.joke,
+                    joke: useChuckNorrisAPI ? data.value : data.joke,
                     rating: undefined,
                 };
                 jokeReports.push(jokeData);
                 console.log(jokeReports);
+                // Toggle the API for the next fetch
+                useChuckNorrisAPI = !useChuckNorrisAPI;
             }
             catch (error) {
                 if (error instanceof Error && joke) {
