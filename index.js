@@ -145,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 };
                 jokeReports.push(jokeData);
                 console.log(jokeReports);
-                // Toggle the API for the next fetch
                 useChuckNorrisAPI = !useChuckNorrisAPI;
             }
             catch (error) {

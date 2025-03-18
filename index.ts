@@ -135,8 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  fetchWeather();
-
   async function fetchJoke() {
     try {
       const response = await fetch(
@@ -171,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
       jokeReports.push(jokeData);
       console.log(jokeReports);
 
-      // Toggle the API for the next fetch
       useChuckNorrisAPI = !useChuckNorrisAPI;
     } catch (error) {
       if (error instanceof Error && joke) {
